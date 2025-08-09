@@ -1,0 +1,2039 @@
+/*******************************/
+/********* General CSS *********/
+/*******************************/
+:root {
+    --bg-color: #ffffff;
+    --text-color: #414141;
+    --link-color: #313131;
+    --accent-color: #3488BB;
+    /* Couleur douce violet/bleu */
+    --navbar-bg: #ffffff;
+    --navbar-text: #414141;
+    --section-bg: #ffffff;
+    --section-title: #414141;
+    --section-subtitle: white;
+    --hero-bg: #3488BB, url(../img/hero-bg.jpg);
+    --hero-title: #ffffff;
+    --hero-subtitle: #ffffff;
+}
+
+.theme-light {
+    --bg-color: #ffffff;
+    --text-color: #414141;
+    --link-color: #313131;
+    --accent-color: #3488BB;
+    --navbar-bg: #ffffff;
+    --navbar-text: #414141;
+    --section-bg: transparent;
+    --section-title: #414141;
+    --section-subtitle: #3488BB;
+    --hero-bg: #3488BB, url(../img/hero-bg.jpg);
+    --hero-title: #ffffff;
+    --hero-subtitle: #ffffff;
+}
+
+.theme-dark {
+    --bg-color: #181818;
+    --text-color: #f1f1f1;
+    --link-color: #f1f1f1;
+    --accent-color: #3488BB;
+    --navbar-bg: #232323;
+    --navbar-text: #f1f1f1;
+    --section-bg: #232323;
+    --section-title: #f1f1f1;
+    --section-subtitle: #3488BB;
+    --hero-bg: linear-gradient(rgba(34, 32, 70, .95), rgba(34, 32, 70, .95)), url(../img/hero-bg.jpg);
+    --hero-title: #f1f1f1;
+    --hero-subtitle: #f1f1f1;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-color, #414141);
+}
+
+a {
+    color: var(--link-color, #313131);
+    transition: .3s;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: var(--accent-color, #EF233C);
+    outline: none;
+    text-decoration: none;
+}
+
+.btn:focus,
+.form-control:focus {
+    box-shadow: none;
+}
+
+.container-fluid {
+    max-width: 1366px;
+}
+
+/* --- Amélioration boutons doux, UI, transitions et ripple --- */
+.btn {
+    padding: 12px 25px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+    background: #3488BB;
+    border: 2px solid #3488BB;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px #3488BB22, 0 0 0 0 #43e97b00;
+    transition: background 0.35s cubic-bezier(.4,0,.2,1),
+                color 0.35s cubic-bezier(.4,0,.2,1),
+                box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+                border 0.35s cubic-bezier(.4,0,.2,1),
+                transform 0.25s cubic-bezier(.4,0,.2,1),
+                filter 0.35s cubic-bezier(.4,0,.2,1);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(67,233,123,0.16);
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s cubic-bezier(.4,0,.2,1), height 0.6s cubic-bezier(.4,0,.2,1), opacity 0.4s;
+    z-index: 0;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px #3488BB33, 0 6px 32px 0 #3488BB44;
+}
+
+.btn:active {
+
+    color: #fff;
+    box-shadow: 0 1px 4px #43e97b33;
+    transform: scale(0.97) translateY(2px);
+    filter: brightness(0.98);
+}
+
+/* Ajout d'un effet de glow subtil au repos */
+.btn {
+    box-shadow: 0 2px 12px #3488BB22, 0 0 0 0 #43e97b00;
+}
+
+/* Pour les boutons ronds (back-to-top, etc.) : effet glow et transition douce */
+.back-to-top, .contact-modern-btn, .theme-toggle-btn, .chatbot-toggle-btn {
+    background: #3488BB!important;
+    color: #fff !important;
+    border-radius: 5% !important;
+    border: none !important;
+    box-shadow: 0 2px 12px #3488BB22, 0 0 8px 0 #43e97b33 !important;
+    transition: background 0.35s cubic-bezier(.4,0,.2,1),
+                color 0.35s cubic-bezier(.4,0,.2,1),
+                box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+                transform 0.25s cubic-bezier(.4,0,.2,1);
+}
+
+.back-to-top:hover, .contact-modern-btn:hover, .theme-toggle-btn:hover, .chatbot-toggle-btn:hover {
+    background: #3488BB !important;
+    color: var(--accent-color) !important;
+    box-shadow: 0 8px 32px #43e97b44, 0 0 16px 2px #3488BB55 !important;
+}
+
+/* Pour éviter les conflits d'overrides précédents */
+.btn, .btn:hover, .btn:focus, .btn:active {
+    outline: none !important;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 8px 0;
+    text-align: center;
+    line-height: 1;
+    font-size: 22px;
+    right: 15px;
+    bottom: 15px;
+    z-index: 9;
+}
+
+.back-to-top i {
+    color: #ffffff;
+}
+
+.back-to-top:hover i {
+    color: #414141;
+}
+
+
+/**********************************/
+/*********** Nav Bar CSS **********/
+/**********************************/
+.navbar {
+    background: var(--navbar-bg) !important;
+    color: var(--navbar-text);
+    transition: .5s;
+    z-index: 999;
+}
+
+.navbar.nav-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+}
+
+.navbar .navbar-brand {
+    margin: 0;
+    font-size: 45px;
+    line-height: 0px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: .5s;
+
+}
+
+.navbar .navbar-brand img {
+    max-width: 100%;
+    max-height: 40px;
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f8f9fa;
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        position: absolute;
+        width: 100%;
+        padding: 30px 60px;
+        background: transparent !important;
+        border-bottom: 1px dashed rgba(256, 256, 256, .2);
+        z-index: 9;
+    }
+
+    .navbar.nav-sticky {
+        padding: 10px 60px;
+        background: #ffffff !important;
+    }
+
+    .navbar .navbar-brand {
+        color: #ffffff;
+    }
+
+    .navbar.nav-sticky .navbar-brand {
+        color: #EF233C;
+    }
+
+    .navbar-light .navbar-nav .nav-link,
+    .navbar-light .navbar-nav .nav-link:focus {
+        padding: 10px 10px 8px 10px;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .navbar-light.nav-sticky .navbar-nav .nav-link,
+    .navbar-light.nav-sticky .navbar-nav .nav-link:focus {
+        color: #414141;
+    }
+
+    .navbar-light .navbar-nav .nav-link:hover,
+    .navbar-light .navbar-nav .nav-link.active {
+        color: #111111;
+    }
+
+    .navbar-light.nav-sticky .navbar-nav .nav-link:hover,
+    .navbar-light.nav-sticky .navbar-nav .nav-link.active {
+        color: #EF233C;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .navbar {
+        padding: 15px;
+        background: #ffffff !important;
+    }
+
+    .navbar .navbar-brand {
+        color: #EF233C;
+    }
+
+    .navbar .navbar-nav {
+        margin-top: 15px;
+    }
+
+    .navbar a.nav-link {
+        padding: 5px;
+    }
+
+    .navbar .dropdown-menu {
+        box-shadow: none;
+    }
+}
+
+
+/*******************************/
+/********** Hero CSS ***********/
+/*******************************/
+.hero {
+    position: relative;
+    width: 100%;
+    margin-bottom: 45px;
+    overflow: hidden;
+    background: var(--hero-bg);
+}
+
+.hero .container-fluid {
+    padding: 0;
+}
+
+.hero .hero-image {
+    position: relative;
+    text-align: right;
+    padding-right: 75px;
+}
+
+.hero .hero-image img {
+   width: 67vw;
+  height: 98vh;
+  margin-top: 55px;
+}
+
+
+.hero .hero-content {
+    position: relative;
+    padding-left: 75px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero .hero-text p {
+    color: var(--hero-subtitle);
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 200px;
+}
+
+.hero .hero-text h1 {
+    color: var(--section-title);
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.hero .hero-text h2 {
+    display: inline-block;
+    margin: 0;
+    height: 35px;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.hero .hero-text .typed-text {
+    display: none;
+}
+
+.hero .hero-text .typed-cursor {
+    font-size: 35px;
+    font-weight: 300;
+    color: #ffffff;
+}
+
+.hero .hero-btn .btn {
+    margin-top: 35px;
+   
+}
+
+.hero .hero-btn .btn:first-child {
+    margin-right: 10px;
+}
+
+@media (max-width: 991.98px) {
+    .hero {
+        padding-top: 60px;
+    }
+
+    .hero .hero-content {
+        padding: 0 15px;
+    }
+
+    .hero .hero-text p {
+        font-size: 20px;
+        margin-top: 50px;
+    }
+
+    .hero .hero-text h1 {
+        font-size: 45px;
+    }
+
+    .hero .hero-text h2 {
+        font-size: 25px;
+        height: 25px;
+    }
+
+    .hero .hero-btn .btn {
+        padding: 12px 30px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .hero {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .hero,
+    .hero .hero-text,
+    .hero .hero-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero .hero-text p {
+        font-size: 18px;
+    }
+
+    .hero .hero-text h1 {
+        font-size: 35px;
+    }
+
+    .hero .hero-text h2 {
+        font-size: 22px;
+        height: 22px;
+    }
+
+    .hero .hero-btn .btn {
+        padding: 10px 15px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero .hero-text p {
+        font-size: 16px;
+    }
+
+    .hero .hero-text h1 {
+        font-size: 30px;
+    }
+
+    .hero .hero-text h2 {
+        font-size: 18px;
+        height: 18px;
+    }
+
+    .hero .hero-btn .btn {
+        padding: 8px 10px;
+        letter-spacing: 0;
+    }
+}
+
+
+/*******************************/
+/******* Section Header ********/
+/*******************************/
+.section-header {
+    position: relative;
+    margin-bottom: 45px;
+}
+
+.section-header p {
+    display: inline-block;
+    margin: 0 30px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    position: relative;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: #ffffff;
+}
+
+.section-header p::before {
+    position: absolute;
+    content: "";
+    height: 3px;
+    top: 11px;
+    right: 0;
+    left: -30px;
+    background: #EF233C;
+    z-index: -1;
+}
+
+.section-header p::after {
+    position: absolute;
+    content: "";
+    width: 3px;
+    height: 3px;
+    top: 11px;
+    left: 3px;
+    background: #EF233C;
+    z-index: 1;
+}
+
+.section-header h2 {
+    margin: 0;
+    position: relative;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+@media (max-width: 767.98px) {
+    .section-header h2 {
+        font-size: 30px;
+    }
+}
+
+
+/*******************************/
+/********** About CSS **********/
+/*******************************/
+.about {
+    position: relative;
+    width: 100%;
+    margin: -45px 0 45px 0;
+}
+
+.about .col-lg-6 {
+    padding: 0;
+}
+
+.about .section-header {
+    margin-bottom: 30px;
+}
+
+.about .about-img {
+    position: relative;
+    height: 100%;
+}
+
+.about .about-img img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about .about-content {
+    padding: 0 60px;
+}
+
+.about .about-text p {
+    font-size: 16px;
+}
+
+.about .skills {
+    margin-bottom: 30px;
+}
+
+.about .skill-name {
+    margin-top: 15px;
+}
+
+.about .skill-name p {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.about .skill-name p:last-child {
+    float: right;
+}
+
+.about .progress {
+    height: 10px;
+    border-radius: 10px;
+    background: #dddddd;
+}
+
+.about .progress .progress-bar {
+    width: 0px;
+    background: #EF233C;
+    border-radius: 10px;
+    transition: 2s;
+}
+
+.about .about-text a.btn {
+    margin-top: 15px;
+}
+
+@media (max-width: 991.98px) {
+    .about .about-content {
+        padding: 45px 15px 0 15px;
+    }
+}
+
+
+/*******************************/
+/******* Experience CSS ********/
+/*******************************/
+.experience {
+    background: var(--section-bg);
+}
+
+.experience .timeline {
+    position: relative;
+    width: 100%;
+}
+
+.experience .timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: #EF233C;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.experience .timeline .timeline-item {
+    position: relative;
+    background: inherit;
+    width: 50%;
+    margin-bottom: 30px;
+}
+
+.experience .timeline .timeline-item.left {
+    left: 0;
+    padding-right: 30px;
+}
+
+.experience .timeline .timeline-item.right {
+    left: 50%;
+    padding-left: 30px;
+}
+
+.experience .timeline .timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 48px;
+    right: -8px;
+    background: #ffffff;
+    border: 2px solid #EF233C;
+    border-radius: 16px;
+    z-index: 1;
+}
+
+.experience .timeline .timeline-item.right::after {
+    left: -8px;
+}
+
+.experience .timeline .timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 46px;
+    right: 10px;
+    z-index: 1;
+    border: 10px solid;
+    border-color: transparent transparent transparent #dddddd;
+}
+
+.experience .timeline .timeline-item.right::before {
+    left: 10px;
+    border-color: transparent #dddddd transparent transparent;
+}
+
+.experience .timeline .timeline-date {
+    position: absolute;
+    width: 100%;
+    top: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #EF233C;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.experience .timeline .timeline-item.left .timeline-date {
+    text-align: left;
+    left: calc(100% + 55px);
+}
+
+.experience .timeline .timeline-item.right .timeline-date {
+    text-align: right;
+    right: calc(100% + 55px);
+}
+
+.experience .timeline .timeline-text {
+    padding: 30px;
+    background: var(--section-bg);
+    color: var(--text-color);
+    position: relative;
+    border-right: 5px solid #dddddd;
+    box-shadow: 0 0 60px rgba(0, 0, 0, .08);
+}
+
+.experience .timeline .timeline-item.right .timeline-text {
+    border-right: none;
+    border-left: 5px solid #dddddd;
+}
+
+.experience .timeline .timeline-text h2 {
+    color: var(--section-title);
+    margin: 0 0 5px 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.experience .timeline .timeline-text h4 {
+    color: var(--section-subtitle);
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.experience .timeline .timeline-text p {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+@media (max-width: 767.98px) {
+    .experience .timeline::after {
+        left: 8px;
+    }
+
+    .experience .timeline .timeline-item {
+        width: 100%;
+        padding-left: 38px;
+    }
+
+    .experience .timeline .timeline-item.left {
+        padding-right: 0;
+    }
+
+    .experience .timeline .timeline-item.right {
+        left: 0%;
+        padding-left: 38px;
+    }
+
+    .experience .timeline .timeline-item.left::after,
+    .experience .timeline .timeline-item.right::after {
+        left: 0;
+    }
+
+    .experience .timeline .timeline-item.left::before,
+    .experience .timeline .timeline-item.right::before {
+        left: 18px;
+        border-color: transparent #dddddd transparent transparent;
+    }
+
+    .experience .timeline .timeline-item.left .timeline-date,
+    .experience .timeline .timeline-item.right .timeline-date {
+        position: relative;
+        top: 0;
+        right: auto;
+        left: 0;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .experience .timeline .timeline-item.left .timeline-text,
+    .experience .timeline .timeline-item.right .timeline-text {
+        border-right: none;
+        border-left: 5px solid #dddddd;
+    }
+}
+
+
+/*******************************/
+/********* Service CSS *********/
+/*******************************/
+.service {
+    position: relative;
+    width: 100%;
+    padding: 45px 0 15px 0;
+}
+
+.service .service-item {
+    position: relative;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 0 0 transparent;
+    transition: ease-out 0.5s;
+}
+
+.service .service-item:hover {
+    box-shadow: inset 800px 0 0 0 #23ecef;
+}
+
+.service .service-icon {
+    position: relative;
+    width: 150px;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #EF233C;
+    background: #ffffff;
+}
+
+.service .service-icon i {
+    position: relative;
+    font-size: 60px;
+    color: #EF233C;
+    transition: .3s;
+}
+
+.service .service-item:hover i {
+    font-size: 75px;
+}
+
+.service .service-text {
+    position: relative;
+    width: calc(100% - 120px);
+    padding: 0 30px;
+}
+
+.service .service-text h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 1s;
+}
+
+.service .service-text p {
+    margin: 0;
+    font-size: 16px;
+    transition: 1s;
+}
+
+
+
+@media (max-width: 575.98px) {
+    .service .service-text h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .service .service-text p {
+        font-size: 14px;
+    }
+}
+
+
+/*******************************/
+/******** Portfolio CSS ********/
+/*******************************/
+.portfolio {
+    position: relative;
+    padding: 45px 0 15px 0;
+}
+
+.portfolio #portfolio-filter {
+    padding: 0;
+    margin: -15px 0 25px 0;
+    list-style: none;
+    font-size: 0;
+    text-align: center;
+}
+
+.portfolio #portfolio-filter li {
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #EF233C;
+    border: 2px solid transparent;
+    border-radius: 0;
+    box-shadow: inset 0 0 0 50px #EF233C;
+    transition: ease-out 0.3s;
+    -webkit-transition: ease-out 0.3s;
+    -moz-transition: ease-out 0.3s;
+}
+
+.portfolio #portfolio-filter li:hover,
+.portfolio #portfolio-filter li.filter-active {
+    color: #EF233C;
+    background: transparent;
+    box-shadow: inset 0 0 0 0 #EF233C;
+    border-color: #EF233C;
+}
+
+.portfolio .portfolio-item {
+    position: relative;
+}
+
+.portfolio .portfolio-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio .portfolio-img img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: .5s;
+}
+
+.portfolio .portfolio-item:hover img {
+    margin-left: 15px;
+}
+
+.portfolio .portfolio-text {
+    position: relative;
+    height: 60px;
+    width: calc(100% - 30px);
+    margin: -30px 15px 30px 15px;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .12);
+}
+
+.portfolio .portfolio-text h3 {
+    width: calc(100% - 70px);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 0 15px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.portfolio .portfolio-text a.btn {
+    width: 50px;
+    height: 50px;
+    padding: 0 0 2px 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+    font-weight: 100;
+}
+
+.portfolio .portfolio-item:hover a.btn {
+    color: #EF233C;
+    background: transparent;
+    box-shadow: inset 0 0 0 0 #EF233C;
+    border-color: #EF233C;
+}
+
+
+/*******************************/
+/********* Banner CSS **********/
+/*******************************/
+.banner {
+    position: relative;
+    width: 100%;
+    margin: 45px 0;
+    padding: 90px 0;
+    background: #EF233C;
+}
+
+.banner .container {
+    text-align: center;
+}
+
+.banner .section-header {
+    margin-bottom: 20px;
+}
+
+.banner .section-header p {
+    color: #414141;
+    background: transparent;
+}
+
+.banner .section-header p::after {
+    display: none;
+}
+
+.banner .section-header h2 {
+    color: #ffffff;
+}
+
+.banner .section-header h2 span {
+    color: #414141;
+    font-size: 50px;
+}
+
+.banner .banner-text p {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.banner .banner-text .btn {
+    margin-top: 15px;
+    color: #EF233C;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 50px #ffffff;
+}
+
+
+
+/*******************************/
+/********* Pricing CSS *********/
+/*******************************/
+.price,
+.price .price-item {
+    background: var(--section-bg);
+}
+
+.price .price-header,
+.price .price-title h2 {
+    color: var(--section-title);
+}
+
+.price .price-header {
+    background: var(--section-bg);
+}
+
+.price .price-prices h2,
+.price .price-prices h2 small,
+.price .price-prices h2 span {
+    color: var(--accent-color);
+}
+
+.price .price-description ul li {
+    color: var(--text-color);
+}
+
+.price .price-item.featured-item .price-header {
+    color: var(--accent-color);
+}
+
+.price .price-item .price-action .btn {
+    color: var(--section-bg);
+    background: var(--section-title);
+    box-shadow: inset 0 0 0 50px var(--section-title);
+}
+
+.price .price-item .price-action {
+    color: var(--section-title);
+    background: transparent;
+    box-shadow: inset 0 0 0 0 var(--section-title);
+    border-color: var(--section-title);
+}
+
+.price .price-item.featured-item .price-action .btn {
+    color: var(--section-bg);
+    background: var(--accent-color);
+    box-shadow: inset 0 0 0 50px var(--accent-color);
+}
+
+
+
+
+/*******************************/
+/*********** Team CSS **********/
+/*******************************/
+.team {
+    position: relative;
+    width: 100%;
+    padding: 45px 0 15px 0;
+}
+
+.team .team-item {
+    position: relative;
+    background: #ffffff;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: inset 0 0 0 0 transparent;
+    transition: ease-out 0.5s;
+}
+
+.team .team-img {
+    position: relative;
+    width: 50%;
+    overflow: hidden;
+}
+
+.team .team-img img {
+    position: relative;
+    width: 100%;
+    transition: .5s;
+}
+
+.team .team-text {
+    position: relative;
+    width: 50%;
+    padding: 0 30px;
+}
+
+.team .team-text h2 {
+    color: #EF233C;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    transition: 1s;
+}
+
+.team .team-text h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: 1s;
+}
+
+.team .team-text p {
+    margin-bottom: 20px;
+    transition: 1s;
+}
+
+.team .team-social {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.team .team-social a.btn {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: normal;
+    margin-right: 5px;
+}
+
+.team .team-item:hover {
+    box-shadow: inset 800px 0 0 0 var(--accent-color) !important;
+}
+
+.team .team-item:hover .team-img img {
+    transform: scale(1.2);
+}
+
+.team .team-item:hover .team-text h2,
+.team .team-item:hover .team-text h4,
+.team .team-item:hover .team-text p {
+    color: #ffffff;
+}
+
+.team .team-item:hover .team-social a.btn {
+    background: #ffffff;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+
+
+@media(max-width: 575.98px) {
+    .team .team-text {
+        padding: 0 15px;
+    }
+
+    .team .team-text h2 {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    .team .team-text h4 {
+        margin-bottom: 5px;
+    }
+
+    .team .team-text p {
+        font-size: 14px;
+        line-height: 18px;
+        margin-bottom: 10px;
+    }
+}
+
+
+/*******************************/
+/******* Testimonial CSS *******/
+/*******************************/
+.testimonial {
+    position: relative;
+    margin: 45px 0;
+    padding: 90px 0;
+    background: #EF233C;
+}
+
+.testimonial .container {
+    max-width: 900px;
+}
+
+.testimonial .testimonial-icon {
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.testimonial .testimonial-icon i {
+    font-size: 60px;
+    color: rgba(256, 256, 256, .5);
+}
+
+.testimonial .testimonial-item {
+    position: relative;
+    margin: 0 15px;
+    text-align: center;
+}
+
+.testimonial .testimonial-img {
+    position: relative;
+    margin-bottom: 15px;
+    z-index: 1;
+}
+
+.testimonial .testimonial-item img {
+    margin: 0 auto;
+    width: 120px;
+    padding: 10px;
+    border: 5px dotted #ffffff;
+    border-radius: 100px;
+}
+
+.testimonial .testimonial-text {
+    position: relative;
+    margin-top: -70px;
+    padding: 65px 35px 30px 35px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 500px;
+}
+
+.testimonial .testimonial-item p {
+    font-size: 18px;
+    font-style: italic;
+}
+
+.testimonial .testimonial-text h3 {
+    color: #EF233C;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.testimonial .testimonial-text h4 {
+    color: #666666;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.testimonial .owl-dots {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.testimonial .owl-dot {
+    display: inline-block;
+    margin: 0 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(256, 256, 256, .5);
+}
+
+.testimonial .owl-dot.active {
+    background: #ffffff;
+}
+
+
+/*******************************/
+/********* Contact CSS *********/
+/*******************************/
+.contact {
+    position: relative;
+    width: 100%;
+    margin: 45px 0;
+    background: #EF233C;
+}
+
+.contact .container-fluid {
+
+    background-size: contain;
+}
+
+.contact .contact-form {
+    position: relative;
+    padding: 90px 0 90px 45px;
+    background: #EF233C;
+}
+
+.contact .contact-form input {
+    color: #ffffff;
+    padding: 15px 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(256, 256, 256, .5);
+}
+
+.contact .contact-form textarea {
+    color: #ffffff;
+    height: 90px;
+    padding: 15px 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(256, 256, 256, .5);
+}
+
+.contact .contact-form .form-control::placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+
+.contact .contact-form .form-control:-ms-input-placeholder,
+.contact .contact-form .form-control::-ms-input-placeholder {
+    color: #ffffff;
+}
+
+.contact .contact-form .btn {
+    margin-top: 35px;
+    color: #EF233C;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 50px #ffffff;
+}
+
+.contact .contact-form {
+    color: #ffffff;
+    background: transparent;
+    box-shadow: inset 0 0 0 0 #ffffff;
+    border-color: #ffffff;
+}
+
+.contact .help-block ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 14px;
+    font-style: italic;
+    color: #ffffff;
+}
+
+@media (max-width: 767.98px) {
+    .contact .container-fluid {
+        background: none;
+    }
+
+    .contact .contact-form {
+        padding: 90px 0;
+    }
+}
+
+
+/*******************************/
+/*********** Blog CSS **********/
+/*******************************/
+.blog {
+    position: relative;
+    width: 100%;
+    padding: 45px 0 15px 0;
+}
+
+.blog .blog-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.blog .blog-img {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.blog .blog-img img {
+    width: 100%;
+    transition: .5s;
+}
+
+.blog .blog-item:hover img {
+    transform: scale(1.1);
+}
+
+.blog .blog-text {
+    position: relative;
+    padding: 30px;
+    border-right: 1px solid rgba(0, 0, 0, .07);
+    border-bottom: 1px solid rgba(0, 0, 0, .07);
+    border-left: 1px solid rgba(0, 0, 0, .07);
+}
+
+.blog .blog-text h2 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.blog .blog-text p {
+    margin-bottom: 10px;
+}
+
+.blog .blog-item a.btn {
+    margin-top: 10px;
+    padding: 8px 15px;
+}
+
+.blog .blog-item a.btn i {
+    margin-left: 5px;
+}
+
+.blog .blog-meta {
+    position: relative;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.blog .blog-meta p {
+    margin: 0 10px 0 0;
+    font-size: 13px;
+}
+
+.blog .blog-meta i {
+    color: #414141;
+    margin-right: 5px;
+}
+
+.blog .blog-meta p:last-child {
+    margin: 0;
+}
+
+
+/*******************************/
+/********* Footer CSS **********/
+/*******************************/
+.footer {
+    position: relative;
+    margin-top: 45px;
+    background: #EF233C;
+}
+
+.footer .container-fluid {
+    padding: 60px 0 0 0;
+}
+
+.footer .footer-info {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.footer .footer-info h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.footer .footer-info h3 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.footer .footer-menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.footer .footer-menu p {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 0 15px;
+    border-right: 1px solid #ffffff;
+}
+
+.footer .footer-menu p:last-child {
+    border: none;
+}
+
+.footer .footer-social {
+    position: relative;
+    margin-top: 15px;
+}
+
+.footer .footer-social a {
+    display: inline-block;
+}
+
+.footer .footer-social a i {
+    margin-right: 15px;
+    font-size: 20px;
+    color: #ffffff;
+    transition: .3s;
+}
+
+.footer .footer-social a:last-child i {
+    margin: 0;
+}
+
+.footer .footer-social a:hover i {
+    color: #414141;
+}
+
+.footer .copyright {
+    position: relative;
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.footer .copyright::before {
+    position: absolute;
+    content: "";
+    width: 50%;
+    height: 1px;
+    top: 0;
+    left: 25%;
+    background: rgba(256, 256, 256, .2);
+}
+
+.footer .copyright p {
+    margin: 0;
+    color: #ffffff;
+}
+
+.footer .copyright .col-md-6:last-child p {
+    text-align: right;
+}
+
+.footer .copyright p a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.footer .copyright p a:hover {
+    color: #414141;
+}
+
+@media (max-width: 575.98px) {
+    .footer .footer-info h2 {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .footer .footer-info h3 {
+        margin-bottom: 20px;
+        font-size: 16px;
+    }
+
+    .footer .footer-menu p {
+        font-size: 16px;
+        line-height: 16px;
+        padding: 0 5px;
+    }
+}
+
+/* ===================== THEME STYLES ===================== */
+/* Floating theme button */
+.theme-toggle-btn {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 9999;
+    background: var(--accent-color, #EF233C);
+    color: #fff;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.theme-toggle-btn:hover {
+    background: #222;
+}
+
+/*******************************/
+/******* Section Texts & BG ****/
+/*******************************/
+.section-header,
+.about,
+.service,
+.portfolio,
+.banner,
+.price,
+.team,
+.testimonial,
+.contact,
+.blog,
+.footer {
+    background: var(--section-bg);
+}
+
+.section-header h2,
+.about .about-text h2,
+.service .service-text h3,
+.portfolio .portfolio-text h3,
+.banner .section-header h2,
+.price .price-title h2,
+.team .team-text h2,
+.testimonial .testimonial-text h3,
+.contact .section-header h2,
+.blog .blog-text h2,
+.footer .footer-info h2 {
+    color: var(--section-title);
+}
+
+.section-header p,
+.banner .section-header p,
+.price .price-header,
+.team .team-text h4,
+.testimonial .testimonial-text h4,
+.contact .section-header p,
+.footer .footer-info h3 {
+    color: var(--section-subtitle);
+}
+
+.about .about-text p,
+.service .service-text p,
+.portfolio .portfolio-text p,
+.banner .banner-text p,
+.price .price-description ul li,
+.team .team-text p,
+.testimonial .testimonial-item p,
+.contact .contact-form .form-control,
+.blog .blog-text p,
+.footer .footer-menu p,
+.footer .copyright p {
+    color: var(--text-color);
+}
+
+/*******************************/
+/********* Accent Fix **********/
+/*******************************/
+
+.navbar .navbar-brand,
+.navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link:hover,
+.section-header p::before,
+.section-header p::after,
+.experience .timeline-date,
+.experience .timeline .timeline-item::after,
+.service .service-icon,
+.service .service-icon i,
+.portfolio #portfolio-filter li,
+.portfolio #portfolio-filter li:hover,
+.portfolio #portfolio-filter li.filter-active,
+.portfolio .portfolio-text a.btn,
+.portfolio .portfolio-item:hover a.btn,
+.banner,
+.price .price-item.featured-item .price-header,
+.price .price-prices h2,
+.price .price-prices h2 small,
+.price .price-prices h2 span,
+.price .price-item.featured-item .price-action .btn,
+.team .team-text h2,
+.team .team-item:hover .team-text h2,
+.testimonial,
+.testimonial .testimonial-text h3,
+.testimonial .testimonial-item img,
+.contact,
+.contact .contact-form .btn,
+.footer,
+.footer .footer-info h2,
+.footer .footer-info h3,
+.footer .footer-menu p,
+.footer .footer-social a:hover i,
+.footer .copyright p a:hover {
+    background: none;
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    box-shadow: none;
+}
+.service .service-item:hover .service-text h3,
+.service .service-item:hover .service-text p {
+    color: #ffffff;
+}
+
+/* Pour les backgrounds accentués */
+.banner,
+.testimonial,
+.contact,
+.footer {
+    background: var(--accent-color) !important;
+}
+
+/* Pour les boutons accentués */
+
+
+
+/* Pour les progress bar et autres éléments décoratifs */
+.about .progress .progress-bar,
+.experience .timeline .timeline-item::after {
+    background: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+/*******************************/
+/***** Accent & Hover Fixes ****/
+/*******************************/
+/* Timeline bar & dots */
+.experience .timeline::after {
+    background: var(--accent-color) !important;
+}
+
+.experience .timeline .timeline-item::after {
+    background: var(--section-bg) !important;
+    border: 2px solid var(--accent-color) !important;
+}
+
+.theme-dark .experience .timeline .timeline-item::before {
+    border-color: transparent #444444 transparent transparent;
+}
+
+/* Team section hover accent */
+.team .team-item:hover {
+    box-shadow: inset 800px 0 0 0 var(--accent-color) !important;
+}
+
+.team .team-item:hover .team-img img {
+    /* conserve l'effet d'origine */
+    transform: scale(1.2);
+}
+
+.team .team-item:hover .team-text h2,
+.team .team-item:hover .team-text h4,
+.team .team-item:hover .team-text p {
+    color: #fff !important;
+}
+
+.team .team-item:hover .team-social a.btn {
+    background: #fff !important;
+    color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+}
+
+
+/*******************************/
+/***** Form, Footer, Titles ****/
+/*******************************/
+/* Formulaire contact : fond et texte */
+.contact .contact-form {
+    background: var(--section-bg) !important;
+}
+
+.contact .contact-form input,
+.contact .contact-form textarea,
+.contact .contact-form .form-control::placeholder {
+    color: var(--text-color) !important;
+    background: none !important;
+    border-bottom: 1px solid var(--accent-color) !important;
+}
+
+.contact .contact-form .btn {
+    background: var(--accent-color) !important;
+    color: #fff !important;
+}
+
+
+
+/* Footer : texte et fond */
+.footer,
+.footer .footer-info h2,
+.footer .footer-info h3,
+.footer .footer-menu p,
+.footer .copyright p,
+.footer .copyright p a {
+    background: var(--accent-color) !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.footer .footer-social a i {
+    color: #fff !important;
+}
+
+.footer .footer-social a:hover i {
+    color: var(--accent-color) !important;
+    background: #fff !important;
+}
+
+/* Enlever les backgrounds blancs sur les titres */
+.section-header p,
+.banner .section-header p {
+    background: none !important;
+    color: var(--section-subtitle) !important;
+}
+
+/*******************************/
+/******** Chatbot UI CSS *******/
+/*******************************/
+.chatbot-toggle-btn {
+    position: fixed;
+    bottom: 88px;
+    right: 20px;
+    z-index: 10001;
+    background: var(--accent-color, #3488BB);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.chatbot-toggle-btn:hover {
+    background: #4b47c2;
+}
+
+.chatbot-window {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 387px;
+    max-width: 109vw;
+    height: 490px;
+    background: var(--section-bg, #fff);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    display: flex;
+    flex-direction: column;
+    z-index: 10002;
+    overflow: hidden;
+    animation: chatbot-pop 0.2s;
+}
+
+@keyframes chatbot-pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.chatbot-header {
+    background: var(--accent-color, #3488BB);
+    color: #fff;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatbot-header .chatbot-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chatbot-message {
+    max-width: 80%;
+    padding: 10px 16px;
+    border-radius: 16px;
+    font-size: 15px;
+    margin-bottom: 2px;
+    word-break: break-word;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.chatbot-message.bot {
+    background: #f1f1f1;
+    color: #333;
+    align-self: flex-start;
+}
+
+.theme-dark .chatbot-message.bot {
+    background: #23223a;
+    color: #fff;
+}
+
+.chatbot-message.user {
+    background: var(--accent-color, #3488BB);
+    color: #fff;
+    align-self: flex-end;
+}
+
+.chatbot-options {
+    display: flex;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border-top: 1px solid #eee;
+}
+
+.theme-dark .chatbot-options {
+    border-top: 1px solid #333;
+}
+
+.chatbot-option {
+    background: #f1f1f1;
+    color: #333;
+    border: none;
+    border-radius: 12px;
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.chatbot-option:hover {
+    background: var(--accent-color, #3488BB);
+    color: #fff;
+}
+
+.theme-dark .chatbot-option {
+    background: #23223a;
+    color: #fff;
+}
+
+.chatbot-input-area {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+}
+
+.theme-dark .chatbot-input-area {
+    background: #23223a;
+    border-top: 1px solid #333;
+}
+
+.chatbot-input-area input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    padding: 8px;
+    outline: none;
+    color: var(--text-color, #333);
+}
+
+.chatbot-input-area button {
+    background: none;
+    border: none;
+    color: var(--accent-color, #3488BB);
+    font-size: 22px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.chatbot-input-area button:hover {
+    color: #4b47c2;
+}
+
+/*******************************/
+/***** Chatbot Responsive ******/
+/*******************************/
+@media (max-width: 750px) {
+    .chatbot-window {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        top: 0;
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        z-index: 10002;
+        animation: chatbot-pop-mobile 0.2s;
+    }
+    #contact-user-img{
+        display: flex;
+        align-items : center;
+        align-content : center;
+        justify-content : center;
+        margin-left : 65vw ! important;
+        
+    }
+}
+    .chatbot-toggle-btn,
+    .theme-toggle-btn {
+        width: 38px !important;
+        height: 38px !important;
+        min-width: 38px !important;
+        min-height: 38px !important;
+        font-size: 18px !important;
+        left: auto !important;
+        right: 16px !important;
+        bottom: unset;
+        top: unset;
+        margin-bottom: 12px;
+        box-shadow: 0 1px 6px #0002 !important;
+    }
+    .chatbot-toggle-btn {
+        position: fixed;
+        bottom: 86px !important;
+        right: 16px !important;
+        left: auto !important;
+        z-index: 10001;
+    }
+    .theme-toggle-btn {
+        position: fixed;
+        bottom: 125px !important;
+        right: 16px !important;
+        left: auto !important;
+        z-index: 10001;
+    }
