@@ -4,7 +4,7 @@
 const API_BASE_URL = 'https://wise-server.onrender.com';
 //const API_URL = 'http://localhost:5000/site/details';
 const API_URL = 'https://wise-server.onrender.com/site/details';
-const SITE_ID = '685894325b0e6853e0c9bbf9';
+const SITE_ID = '68977d9f0b46624b1437833a';
 
 function showPreloader() {
     const loader = document.getElementById('loader');
