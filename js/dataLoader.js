@@ -1,10 +1,10 @@
 // dataLoader.js
 // Ce script charge les données du serveur, les stocke dans le localStorage et les injecte dans la page d'accueil.
-//const API_BASE_URL = 'http://localhost:5000';
+// const API_BASE_URL = 'http://localhost:5000';
 const API_BASE_URL = 'https://wise-server.onrender.com';
-//const API_URL = 'http://localhost:5000/site/details';
+// const API_URL = 'http://localhost:5000/site/details';
 const API_URL = 'https://wise-server.onrender.com/site/details';
-const SITE_ID = '68977d9f0b46624b1437833a';
+const SITE_ID = '68979a270b46624b143783ab';
 
 function showPreloader() {
     const loader = document.getElementById('loader');
@@ -38,7 +38,7 @@ function injectDataToHome(data) {
         const heroImg = document.querySelector('.hero-image img');
         if (heroImg) {
             if (data.user && data.user.profileImage1) {
-                heroImg.src = data.user.profileImage1.startsWith('http') ? data.user.profileImage1 : (API_BASE_URL + data.user.profileImage1);
+                heroImg.src = data.user.profileImage1.startsWith('http') ? data.user.profileImage1 : ( data.user.profileImage1);
                 heroImg.alt = data.user.username || data.user.name || 'Hero Image';
                 heroImg.style.display = '';
             } else {
@@ -58,7 +58,7 @@ function injectDataToHome(data) {
         }
         const logo = document.querySelector('.logo img');
         if (logo) {
-            logo.src = data.user.logo ? (data.user.logo.startsWith('http') ? data.user.logo : (API_BASE_URL + data.user.logo)) : API_BASE_URL + '/images/logo.png';
+            logo.src = data.user.logo ? (data.user.logo.startsWith('http') ? data.user.logo : ( data.user.logo)) :  '/images/logo.png';
             logo.alt = data.user.username || data.user.name || 'Logo';
 
         }
@@ -108,7 +108,7 @@ function injectDataToHome(data) {
         const logo = document.querySelector('.about-img img');
         if (logo) {
             if (data.user.profileImage2) {
-                logo.src = data.user.profileImage2.startsWith('http') ? data.user.profileImage2 : (API_BASE_URL + data.user.profileImage2);
+                logo.src = data.user.profileImage2.startsWith('http') ? data.user.profileImage2 : ( data.user.profileImage2);
                 logo.alt = data.user.username || data.user.name || 'Logo';
                 logo.style.display = '';
                 if (document.getElementById('about-avatar-placeholder')) document.getElementById('about-avatar-placeholder').remove();
@@ -416,7 +416,7 @@ function injectDataToHome(data) {
                 // Gestion de l'URL de l'image
                 let imgUrl = post.media?.[0]?.url || post.media?.[1]?.url || post.image;
                 if (imgUrl && !imgUrl.startsWith('http')) {
-                    imgUrl = API_BASE_URL + imgUrl;
+                    imgUrl =  imgUrl;
                 }
                 // Construction du bloc article
                 const article = document.createElement('div');
@@ -450,7 +450,7 @@ function injectDataToHome(data) {
         if (contactImg) {
             let imgUrl = data.user.profileImage1 || data.user.profileImage3 || '';
             if (imgUrl && !imgUrl.startsWith('http')) {
-                imgUrl = API_BASE_URL + imgUrl;
+                imgUrl =  imgUrl;
             }
             contactImg.src = imgUrl || '';
             contactImg.alt = data.user.name || data.user.username || 'User';
@@ -461,7 +461,7 @@ function injectDataToHome(data) {
     if (contactSection && data && data.user) {
         let bgUrl = data.user.profileImage || data.user.profileImage1 || '';
         if (bgUrl && !bgUrl.startsWith('http')) {
-            bgUrl = API_BASE_URL + bgUrl;
+            bgUrl =  bgUrl;
         }
         contactSection.style.background = `url('${bgUrl}') left center / contain no-repeat`;
     }
@@ -500,7 +500,7 @@ function injectDataToHome(data) {
     if (data && data.user) {
         const footerLogo = document.querySelector('.footer .footer-logo img');
         if (footerLogo) {
-            footerLogo.src = data.user.logo ? (data.user.logo.startsWith('http') ? data.user.logo : (API_BASE_URL + data.user.logo)) : API_BASE_URL + '/images/logo.png';
+            footerLogo.src = data.user.logo ? (data.user.logo.startsWith('http') ? data.user.logo : ( data.user.logo)) :  '/images/logo.png';
             footerLogo.alt = data.user.username || data.user.name || 'Logo';
         }
         const footerText = document.querySelector('.footer .footer-text p');
@@ -841,7 +841,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //    alert('[DataLoader] Données du site trouvées dans le localStorage, injection du lien CV');
         try {
             const data = JSON.parse(siteData);
-            const cvUrl = API_BASE_URL + data?.user?.cvFile;
+            const cvUrl =  data?.user?.cvFile;
             // Sélectionne le bouton qui contient le texte "Telecharger Cv"
             const btns = document.querySelectorAll('.hero-btn .btn');
             //    alert(cvUrl)
@@ -887,7 +887,7 @@ document.addEventListener('DOMContentLoaded', function () {
         chatbotInput.value = '';
         try {
             // Appel API backend (adapter l'URL si besoin)
-            const res = await fetch(API_BASE_URL + '/bot/send', {
+            const res = await fetch( '/bot/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message })
